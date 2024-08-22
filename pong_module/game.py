@@ -94,7 +94,7 @@ class Game:
                     self.right_hits += 1
 
     def draw(self, draw_score=True, draw_hits=False):
-        self.window.fill(self.BLACK)
+        self.window.fill(self.BROWN)
 
         self._draw_divider()
 
