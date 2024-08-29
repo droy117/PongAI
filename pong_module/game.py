@@ -18,6 +18,7 @@ class Game:
     WHITE = (255, 255, 255)
     BLACK = (0, 0, 0)
     RED = (255, 0, 0)
+    GREEN = (0, 255, 0)
     BROWN = "#84714F"
 
     def __init__(self, window, window_width, window_height):
@@ -36,11 +37,11 @@ class Game:
         self.right_hits = 0
         self.window = window
 
-    def _draw_score(self):
+    def _draw_score(self, left_player, right_player):
         left_score_text = self.SCORE_FONT.render(
-            f"{self.left_score}", 1, self.WHITE)
+            f"{left_player}: {self.left_score}", 1, self.WHITE)
         right_score_text = self.SCORE_FONT.render(
-            f"{self.right_score}", 1, self.WHITE)
+            f"{right_player}: {self.right_score}", 1, self.WHITE)
         self.window.blit(left_score_text, (self.window_width //
                                            4 - left_score_text.get_width()//2, 20))
         self.window.blit(right_score_text, (self.window_width * (3/4) -
@@ -93,13 +94,13 @@ class Game:
                     ball.y_vel = -1 * y_vel
                     self.right_hits += 1
 
-    def draw(self, draw_score=True, draw_hits=False):
+    def draw(self, draw_score=True, draw_hits=False, left_player="P1", right_player="P2"):
         self.window.fill(self.BROWN)
 
         self._draw_divider()
 
         if draw_score:
-            self._draw_score()
+            self._draw_score(left_player, right_player)
 
         if draw_hits:
             self._draw_hits()
