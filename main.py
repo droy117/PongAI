@@ -5,6 +5,7 @@ from pong_module import Game
 FPS = 60
 
 width, height = 800, 600
+pygame.display.set_caption("PongAI")
 window = pygame.display.set_mode((width, height))
 clock = pygame.time.Clock()
 
@@ -185,7 +186,7 @@ class PongGame:
         while run:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    quit()
+                    pygame.quit()
 
             output1 = net1.activate((self.left_paddle.y, self.ball.y, abs(self.left_paddle.x-self.ball.x)))
             decision1 = output1.index(max(output1))
@@ -283,7 +284,6 @@ def intro_screen(config):
             if event.type == pygame.QUIT:
                 run = False
                 pygame.quit()
-                quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_1:
                     get_ai(config)  
@@ -293,8 +293,8 @@ def intro_screen(config):
                     play_ai_vs_ai(config)  
 
 if __name__ == '__main__':
-    local_dir = os.path.dirname(__file__)
-    config_path = os.path.join(local_dir, 'config.txt')
+    # local_dir = os.path.dirname(__file__)
+    config_path = os.path.join('./config.txt')
 
     config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
                          neat.DefaultSpeciesSet, neat.DefaultStagnation,
